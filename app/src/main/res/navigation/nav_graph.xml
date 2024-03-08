@@ -20,5 +20,14 @@
         android:id="@+id/bookLibraryFragment"
         android:name="com.example.appdeveloperassignment.ui.fragments.BookLibraryFragment"
         android:label="fragment_book_library"
-        tools:layout="@layout/fragment_book_library" />
+        tools:layout="@layout/fragment_book_library" >
+        <action
+            android:id="@+id/actionBookLibraryToMyBooksFragment"
+            app:destination="@id/myBooksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myBooksFragment"
+        android:name="com.example.appdeveloperassignment.ui.fragments.MyBooksFragment"
+        android:label="MyBooksFragment"
+        tools:layout="@layout/fragment_my_books"/>
 </navigation>

@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.appdeveloperassignment.R
 import com.example.appdeveloperassignment.data.BookListResponse
 import com.example.appdeveloperassignment.databinding.RvBookLibraryItemBinding
+import com.example.appdeveloperassignment.databinding.RvMyBooksItemBinding
 
-class BookLibraryAdapter(private var list: List<BookListResponse.BookListResponseItem>) :
-    RecyclerView.Adapter<BookLibraryAdapter.BookLibraryViewHolder>() {
+class MyBooksAdapter(private var list: List<BookListResponse.BookListResponseItem>) :
+    RecyclerView.Adapter<MyBooksAdapter.BookLibraryViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookLibraryViewHolder {
-        val binding = RvBookLibraryItemBinding
+        val binding = RvMyBooksItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
         return BookLibraryViewHolder(binding)
     }
@@ -35,16 +36,15 @@ class BookLibraryAdapter(private var list: List<BookListResponse.BookListRespons
     }
 
 
-    inner class BookLibraryViewHolder(private val binding: RvBookLibraryItemBinding) :
+    inner class BookLibraryViewHolder(private val binding: RvMyBooksItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.tvBookName.text = list[position].bOOKNAME
             binding.tvIdNumber.text = list[position].bOOKID.toString()
-            binding.tvAvailableNumber.text = list[position].bOOKQTY.toString()
 
-            binding.btnBorrow.setOnClickListener {
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.actionBookLibraryToMyBooksFragment)
+            binding.btnReturnBook.setOnClickListener {
+                /* Navigation.findNavController(binding.root)
+                     .navigate(R.id.actionBookLibraryToMyBooksFragment)*/
             }
         }
 
