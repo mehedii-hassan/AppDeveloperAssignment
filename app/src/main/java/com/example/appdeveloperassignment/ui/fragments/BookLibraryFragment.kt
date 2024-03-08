@@ -28,8 +28,8 @@ class BookLibraryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val jsonString = readJsonFromAssets(requireContext(), "book_list.json")
-        val bookList = parseJsonToModel(jsonString)
-        Toast.makeText(context, "size ${bookList.size}", Toast.LENGTH_LONG).show()
+        val bookList = parseJsonToModel(jsonString).toMutableList()
+        //Toast.makeText(context, "size ${bookList.size}", Toast.LENGTH_LONG).show()
 
 
         val adapter = BookLibraryAdapter(bookList)

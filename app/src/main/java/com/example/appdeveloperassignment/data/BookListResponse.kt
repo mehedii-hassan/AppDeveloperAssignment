@@ -10,15 +10,15 @@ data class BookListResponse(
     data class BookListResponseItem(
 
         @field:SerializedName("BOOK_QTY")
-        val bOOKQTY: Int,
+        var bOOKQTY: Int,
 
         @field:SerializedName("BOOK_NAME")
-        val bOOKNAME: String,
+        var bOOKNAME: String,
 
         @field:SerializedName("BOOKID")
-        val bOOKID: Int,
+        var bOOKID: Int,
 
         @field:SerializedName("BORROWED")
-        val bORROWED: Boolean
+        var bORROWED: Boolean
     )
 }

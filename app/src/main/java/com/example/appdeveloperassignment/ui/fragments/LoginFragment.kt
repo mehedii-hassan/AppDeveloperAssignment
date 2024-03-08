@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.appdeveloperassignment.R
 import com.example.appdeveloperassignment.databinding.FragmentLoginBinding
+import com.example.appdeveloperassignment.ui.utils.SharedPrefManager
 
 
 class LoginFragment : Fragment() {
@@ -26,6 +27,7 @@ class LoginFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        SharedPrefManager.clearFilteredJobList(requireContext())
         binding.btnLogin.setOnClickListener {
             userLogin()
         }
@@ -43,7 +45,7 @@ class LoginFragment : Fragment() {
         if (name == "Admin" && password == "Admin@123") {
             Navigation.findNavController(requireView())
                 .navigate(R.id.actionLoginToBookLibraryFragment)
-            Toast.makeText(context, "successfully logged in", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "successfully logged in", Toast.LENGTH_SHORT).show()
 
         } else {
             Toast.makeText(
