@@ -50,8 +50,6 @@ class BookLibraryAdapter(private var list: MutableList<BookListResponse.BookList
             }
 
             binding.btnBorrow.setOnClickListener {
-                /*Navigation.findNavController(binding.root)
-                    .navigate(R.id.actionBookLibraryToMyBooksFragment)*/
 
                 if (list[position].bOOKQTY == 1) {
                     Toast.makeText(
@@ -81,6 +79,10 @@ class BookLibraryAdapter(private var list: MutableList<BookListResponse.BookList
                             "Successfully added borrowed list",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        SharedPrefManager.saveBookList(binding.root.context, list)
+                        Navigation.findNavController(binding.root)
+                            .navigate(R.id.actionBookLibraryToMyBooksFragment)
 
                     } else {
                         Toast.makeText(

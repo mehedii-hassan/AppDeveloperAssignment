@@ -23,11 +23,19 @@
         tools:layout="@layout/fragment_book_library" >
         <action
             android:id="@+id/actionBookLibraryToMyBooksFragment"
-            app:destination="@id/myBooksFragment" />
+            app:destination="@id/myBooksFragment"
+            app:popUpTo="@id/bookLibraryFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/myBooksFragment"
         android:name="com.example.appdeveloperassignment.ui.fragments.MyBooksFragment"
         android:label="MyBooksFragment"
-        tools:layout="@layout/fragment_my_books"/>
+        tools:layout="@layout/fragment_my_books">
+        <action
+            android:id="@+id/actionToLibraryFragment"
+            app:destination="@id/bookLibraryFragment"
+            app:popUpTo="@id/myBooksFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

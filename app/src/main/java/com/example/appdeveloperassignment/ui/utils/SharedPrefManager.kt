@@ -11,7 +11,7 @@ import java.lang.reflect.Type
 object SharedPrefManager {
 
     private const val PREFS_NAME = "OPUS_EMPLOYER"
-    private const val KEY_FILTERED_JOB_LIST = "FILTERED_JOB_LIST"
+    private const val KEY_BOOK_LIST = "BOOK_LIST"
     private const val Key_limit = "limit"
 
 
@@ -34,22 +34,22 @@ object SharedPrefManager {
     }
 
     //Save favorite candidates model to SharedPreferences----------------------------------------------------
-    fun saveFilterJobList(
+    fun saveBookList(
         context: Context,
-        filteredJobList: List<BookListResponse.BookListResponseItem>
+        bookList: MutableList<BookListResponse.BookListResponseItem>
     ) {
         val editor = getSharedPreferences(context).edit()
         val gson = Gson()
-        val json: String = gson.toJson(filteredJobList)
-        editor.putString(KEY_FILTERED_JOB_LIST, json)
+        val json: String = gson.toJson(bookList)
+        editor.putString(KEY_BOOK_LIST, json)
         editor.apply()
     }
 
 
     //Get all candidates model  from SharedPreferences----------------------------------------------------
-    fun getFilterJobList(context: Context): List<BookListResponse.BookListResponseItem>? {
+    fun getBookList(context: Context): MutableList<BookListResponse.BookListResponseItem>? {
         val gson = Gson()
-        val json = getSharedPreferences(context).getString(KEY_FILTERED_JOB_LIST, null)
+        val json = getSharedPreferences(context).getString(KEY_BOOK_LIST, null)
 
         val type: Type = object : TypeToken<List<BookListResponse.BookListResponseItem>>() {}.type
         return gson.fromJson(json, type)

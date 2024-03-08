@@ -1,15 +1,19 @@
 package com.example.appdeveloperassignment.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appdeveloperassignment.R
 import com.example.appdeveloperassignment.data.BookListResponse
 import com.example.appdeveloperassignment.databinding.RvBookLibraryItemBinding
 import com.example.appdeveloperassignment.databinding.RvMyBooksItemBinding
+import com.example.appdeveloperassignment.ui.utils.SharedPrefManager
 
-class MyBooksAdapter(private var list: List<BookListResponse.BookListResponseItem>) :
+class MyBooksAdapter(private var list: MutableList<BookListResponse.BookListResponseItem>) :
     RecyclerView.Adapter<MyBooksAdapter.BookLibraryViewHolder>() {
 
 
@@ -19,10 +23,6 @@ class MyBooksAdapter(private var list: List<BookListResponse.BookListResponseIte
         return BookLibraryViewHolder(binding)
     }
 
-    fun submitNewImageList(imageList: List<BookListResponse.BookListResponseItem>) {
-        this.list = imageList
-        notifyDataSetChanged()
-    }
 
     override fun getItemCount(): Int {
         return list.size
@@ -39,12 +39,33 @@ class MyBooksAdapter(private var list: List<BookListResponse.BookListResponseIte
     inner class BookLibraryViewHolder(private val binding: RvMyBooksItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-            binding.tvBookName.text = list[position].bOOKNAME
-            binding.tvIdNumber.text = list[position].bOOKID.toString()
+            if (list[position].bORROWED) {
+                binding.root.visibility = View.VISIBLE
+                binding.tvBookName.text = list[position].bOOKNAME
+                binding.tvIdNumber.text = list[position].bOOKID.toString()
+            }/* else {
+                binding.root.visibility = View.GONE
+
+            }*/
+
 
             binding.btnReturnBook.setOnClickListener {
-                /* Navigation.findNavController(binding.root)
-                     .navigate(R.id.actionBookLibraryToMyBooksFragment)*/
+
+                var qty = list[position].bOOKQTY + 1
+                list[position].bOOKQTY = qty
+                list[position].bORROWED = false
+                Toast.makeText(
+                    binding.root.context,
+                    "Successfully removed borrowed list",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                SharedPrefManager.saveBookList(binding.root.context, list)
+                val bundle = Bundle()
+                bundle.putString("key", "1")
+
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.actionToLibraryFragment, bundle)
             }
         }
 
